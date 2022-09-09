@@ -2,7 +2,9 @@ import { pickAWord, isWordInList } from "./words.js";
 import { generateGrid } from "./grid.js";
 
 // TODO: Event Handling (Key pressed,keyboard letter clicked, restart button clicked)
-// TODO: Fix shitty ui
+// TODO: Fix shitty ui bugs
+// TODO: Color change
+// TODO: 
 
 let currentWord;
 
