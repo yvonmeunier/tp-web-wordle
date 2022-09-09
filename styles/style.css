@@ -11,3 +11,20 @@
     width: 100%;
     height: 95vh;
 }
+.icons {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+.col {
+    
+    text-align: center;
+    border-color: white;
+    border-style: solid;
+    height: 5em;
+}
+.sidebar {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
