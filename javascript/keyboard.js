@@ -1,4 +1,4 @@
-import { handleVisualKBInput } from "./game.js";
+import { handleVisualKBInput, deletePreviousLetter, clearTypedWord } from "./game.js";
 var i, c, t, delay, kb;
 
 export function kb_setup() {
@@ -6,7 +6,7 @@ export function kb_setup() {
     i = kb.getElementsByTagName('input');
     document.getElementById('clear').addEventListener('click',
         function () {
-            document.getElementById('text').value = '';// EVENT CLEAR
+            clearTypedWord();
         }, false);
     generateHandlers();
 }
@@ -22,8 +22,7 @@ function generateHandlers() {
 function makeClickHandler(c) {
     i[c].onclick = function () {
         if (i[c].id === 'back') {
-            document.getElementById('text').value =
-                document.getElementById('text').value.replace(/.$/, '');//EVENT DELETE
+            deletePreviousLetter();
         }
         else {
             handleVisualKBInput(this.value);

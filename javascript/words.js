@@ -5,5 +5,5 @@ export function pickAWord() {
     return list[wordIndex];
 }
 export function isWordInList(word) {
-    return list.includes(word);
+    return list.includes(word.toLowerCase());
 }
