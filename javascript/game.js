@@ -65,7 +65,4 @@ export function deletePreviousLetter() {
         letter_elem = document.querySelector(`[block-${currentLetterIndex}]`);
         letter_elem.textContent = "";
     }
-
-
-    console.log(currentLetterIndex);
 }
