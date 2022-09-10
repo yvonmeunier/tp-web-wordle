@@ -2,7 +2,6 @@ import { pickAWord, isWordInList } from "./words.js";
 import { generateGrid } from "./grid.js";
 
 // TODO: Event Handling (Key pressed,keyboard letter clicked, restart button clicked)
-// TODO: Fix shitty ui bugs
 // TODO: Color change
 // TODO: 
 
@@ -28,13 +27,17 @@ function handleInput(e) {
     if (letter_elem == null) {
         setup();
     }
-    if (text != " " && text != "Enter" && text != "Backspace" && !e.altKey && !e.metaKey && !e.shiftKey  && !e.ctrlKey) {
+    if (text != " " && text != "Enter" && String.fromCharCode(e.keyCode).match(/(\w|\s)/g) && !isFinite(e.key)) {
         letter_elem.textContent = text.toUpperCase();
-        currentLetterIndex++;
+
+        if (currentLetterIndex != (currentWord.length * 6) - 1) {
+            currentLetterIndex++;
+        }
+
     }
-    
+
     if (e.keyCode == 8) {
-        console.log("DELETE");
+        deletePreviousLetter();
     }
 
 }
@@ -44,15 +47,25 @@ export function handleVisualKBInput(value) {
     if (letter_elem == null) {
         setup();
     }
-    if (text != " ") {
-        letter_elem.textContent = value.toUpperCase();
+    letter_elem.textContent = value.toUpperCase();
+    if (currentLetterIndex != (currentWord.length * 6) - 1) {
         currentLetterIndex++;
     }
 }
 
-export function deletePreviousLetter()  {
-    var letter_elem = document.querySelector(`[block-${currentLetterIndex}]`);
-    if (currentLetterIndex > 0) {
+export function deletePreviousLetter() {
+    //  TODO: FIX DELETE
+    var letter_elem;
+    if (currentLetterIndex != 0) {
+        
+        if (currentLetterIndex != (currentWord.length *  6)) {
+            currentLetterIndex--;
+        }
+        
+        letter_elem = document.querySelector(`[block-${currentLetterIndex}]`);
         letter_elem.textContent = "";
     }
+
+
+    console.log(currentLetterIndex);
 }
