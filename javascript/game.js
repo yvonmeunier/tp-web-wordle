@@ -53,6 +53,7 @@ export function handleVisualKBInput(value) {
     }
     letter_elem.textContent = value.toUpperCase();
     if (currentLetterIndex != (currentWord.length * 6) - 1) {
+        typedWord = typedWord.substring(0, currentLetterIndex) + value.toLowerCase() + typedWord.substring(currentLetterIndex + 1);
         currentLetterIndex++;
     }
 }

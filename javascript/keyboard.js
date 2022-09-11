@@ -1,4 +1,4 @@
-import { handleVisualKBInput, deletePreviousLetter, clearTypedWord } from "./game.js";
+import { handleVisualKBInput, deletePreviousLetter, clearTypedWord, submitInput } from "./game.js";
 var i, c, t, delay, kb;
 
 export function kb_setup() {
@@ -7,6 +7,10 @@ export function kb_setup() {
     document.getElementById('clear').addEventListener('click',
         function () {
             clearTypedWord();
+        }, false);
+    document.getElementById('submit').addEventListener('click',
+        function () {
+            submitInput();
         }, false);
     generateHandlers();
 }
