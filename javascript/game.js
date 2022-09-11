@@ -59,15 +59,18 @@ export function handleVisualKBInput(value) {
 
 export function deletePreviousLetter() {
 
-    var letter_elem;
-
-    letter_elem = document.querySelector(`[block-${currentLetterIndex}]`);
-    letter_elem.textContent = "";
-    typedWord = typedWord.substring(0, typedWord.length - 1);
-    console.log(typedWord);
-    if (currentLetterIndex != 0) {
-        currentLetterIndex--;
+    var letter_elem = document.querySelector(`[block-${currentLetterIndex}]`);
+    if (letter_elem == null) {
+        setup();
     }
+    letter_elem.textContent = "";
+    typedWord = typedWord.substring(0, currentLetterIndex) + typedWord.substring(currentLetterIndex + 1);
+    if (currentLetterIndex != 0) {
+        if (currentLetterIndex != currentRow * currentWord.length) {
+            currentLetterIndex--;
+        }
+    }
+
 
 }
 
@@ -81,24 +84,26 @@ export function clearTypedWord() {
 
 }
 export function submitInput() {
+    console.log(typedWord);
     if (isWordInList(typedWord)) {
 
         for (let i = 0; i < typedWord.length; i++) {
             let letter_elem = document.querySelector(`[block-${i + (currentRow * currentWord.length)}]`);
             let kb_letter_elem = document.querySelector(`[value=${letter_elem.textContent}]`);
-            if (currentWord.includes(typedWord[i].toLowerCase())) {
-                if (letter_elem.textContent.toLowerCase() == typedWord[i].toLowerCase()) {
+            //  if word contains letter
+            if (typedWord.indexOf(letter_elem.textContent) != -1) {
+                letter_elem.style.backgroundColor = "yellow";
+                kb_letter_elem.style.backgroundColor = "yellow";
+                // if letter is in correct position
+                if (typedWord.indexOf(letter_elem.textContent) == i) {
                     letter_elem.style.backgroundColor = "green";
                     kb_letter_elem.style.backgroundColor = "green";
-                } else {
-                    letter_elem.style.backgroundColor = "yellow";
-                    kb_letter_elem.style.backgroundColor = "yellow";
                 }
             } else {
                 letter_elem.style.backgroundColor = "red";
                 kb_letter_elem.style.backgroundColor = "red";
             }
-
+            
         }
         currentRow++;
         if (typedWord.toLowerCase() == currentWord) {
@@ -115,13 +120,12 @@ export function submitInput() {
 
             setup();
         }
-        // if  currentRow == 6
         if (currentRow == 6) {
             // LOSE THEN SETUP()
             setup();
         }
-    } else {
-        clearTypedWord();
     }
-    typedWord = "";
+
+    clearTypedWord();
+    currentLetterIndex = currentRow * currentWord.length;
 }
