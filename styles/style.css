@@ -1,5 +1,6 @@
-* {
+*, body {
     margin: 0;
+    background-color: #121213;
 }
 
 .row {
@@ -10,6 +11,7 @@
     overflow: hidden;
     width: 100%;
     margin: 0;
+    border-bottom: #666 1px solid;
 }
 
 .icons {
@@ -19,11 +21,12 @@
 }
 
 .col {
-
+    margin: 0.25em;
+    border: 0.1em;
     text-align: center;
     line-height: 4em;
     border-color: white;
-    border-style: solid;
+    border-style: ridge;
     height: 5em;
 }
 
@@ -64,4 +67,8 @@
 
 #keyboard button {
     color: pink;
+}
+
+.game {
+    margin-top: 6em;
 }
