@@ -115,13 +115,11 @@ export function submitInput() {
         }
         currentRow++;
         if (typedWord.toLowerCase() == currentWord) {
-            // WIN THEN SETUP()
             console.log("WIN");
-            // reset styles
+            alert(`You won with ${currentRow } tries`);
             for (let i = 0; i < currentWord.length; i++) {
                 document.querySelector(`[block-${i + (currentRow * currentWord.length)}]`).style.backgroundColor = "";
             }
-            // reset keyboard styles
             for (let i = 0; i < 26; i++) {
                 document.querySelector(`[value=${String.fromCharCode(65 + i)}]`).style.backgroundColor = "";
             }
@@ -129,7 +127,7 @@ export function submitInput() {
             setup();
         }
         if (currentRow == 6) {
-            // LOSE THEN SETUP()
+            alert("GEAM OVR");
             setup();
         }
     }
