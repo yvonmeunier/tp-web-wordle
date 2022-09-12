@@ -20,6 +20,13 @@ export function setup() {
     }
     hasAlreadyBeenCalled = true;
     console.log(currentWord);
+    for (let i = 0; i < currentWord.length; i++) {
+        document.querySelector(`[block-${i + (currentRow * currentWord.length)}]`).style.backgroundColor = "";
+    }
+    // reset keyboard styles
+    for (let i = 0; i < 26; i++) {
+        document.querySelector(`[value=${String.fromCharCode(65 + i)}]`).style.backgroundColor = "";
+    }
 }
 
 function handleInput(e) {
