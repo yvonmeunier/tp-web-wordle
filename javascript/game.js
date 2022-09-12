@@ -99,13 +99,13 @@ export function submitInput() {
             let letter_elem = document.querySelector(`[block-${i + (currentRow * currentWord.length)}]`);
             let kb_letter_elem = document.querySelector(`[value=${letter_elem.textContent}]`);
             //  if word contains letter
-            if (typedWord.indexOf(letter_elem.textContent) != -1) {
-                letter_elem.style.backgroundColor = "yellow";
-                kb_letter_elem.style.backgroundColor = "yellow";
-                // if letter is in correct position
-                if (typedWord.indexOf(letter_elem.textContent) == i) {
+            if (currentWord.includes(typedWord.charAt(i).toLowerCase())) {
+                if (currentWord.charAt(i) == typedWord.charAt(i).toLowerCase()) {
                     letter_elem.style.backgroundColor = "green";
                     kb_letter_elem.style.backgroundColor = "green";
+                }else {
+                    letter_elem.style.backgroundColor = "yellow";
+                    kb_letter_elem.style.backgroundColor = "yellow";
                 }
             } else {
                 letter_elem.style.backgroundColor = "red";
