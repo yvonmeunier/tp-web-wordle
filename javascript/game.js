@@ -116,10 +116,10 @@ export function submitInput() {
             console.log("WIN");
             alert(`You won with ${currentRow } tries`);
             for (let i = 0; i < currentWord.length; i++) {
-                $(`[block-${i + (currentRow * currentWord.length)}]`).style.backgroundColor = "";
+                $(`[block-${i + (currentRow * currentWord.length)}]`).css("background-color", "");
             }
             for (let i = 0; i < 26; i++) {
-                $(`[value=${String.fromCharCode(65 + i)}]`).style.backgroundColor = "";
+                $(`[value=${String.fromCharCode(65 + i)}]`).css("background-color", "");
             }
 
             setup();
