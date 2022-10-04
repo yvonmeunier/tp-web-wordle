@@ -8,10 +8,10 @@ let currentRow;
 let hasAlreadyBeenCalled;
 let typedWord;
 
-export function setup() {
+export async function setup() {
 
     let grid_elem = $(".game-grid");
-    currentWord = pickAWord();
+    currentWord = await pickAWord();
     currentLetterIndex = 0;
     currentRow = 0;
     typedWord = "";
