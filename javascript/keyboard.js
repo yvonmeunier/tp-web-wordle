@@ -6,15 +6,18 @@ var i, c, t, delay, kb;
 export function kb_setup() {
     i, c, t, delay = 5000, kb = document.getElementById('keyboard');
     i = kb.getElementsByTagName('input');
-    $("#clear").click(function () {
-        clearTypedWord();
-    });
-    $("#submit").click(function () {
-        submitInput();
-    });
-    $("#restart").click(function () {
-        setup();
-    });
+    document.getElementById('clear').addEventListener('click',
+        function () {
+            clearTypedWord();
+        }, false);
+    document.getElementById('submit').addEventListener('click',
+        function () {
+            submitInput();
+        }, false);
+    document.getElementById('restart').addEventListener('click',
+        function () {
+            setup();
+        }, false);
     generateHandlers();
 }
 
