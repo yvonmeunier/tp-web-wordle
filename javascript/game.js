@@ -59,7 +59,7 @@ export function handleVisualKBInput(value) {
         setup();
     }
     letter_elem.textContent = value.toUpperCase();
-    if (currentLetterIndex != (currentWord.length * 6) - 1) {
+    if (currentLetterIndex != (currentWord.length * 6) - 1 && currentLetterIndex != ((currentRow + 1) * currentWord.length) - 1) {
         typedWord = typedWord.substring(0, currentLetterIndex) + value.toLowerCase() + typedWord.substring(currentLetterIndex + 1);
         currentLetterIndex++;
     }
@@ -94,22 +94,20 @@ export function clearTypedWord() {
 export function submitInput() {
     console.log(typedWord);
     if (isWordInList(typedWord)) {
-
         for (let i = 0; i < typedWord.length; i++) {
             let letter_elem = document.querySelector(`[block-${i + (currentRow * currentWord.length)}]`);
             let kb_letter_elem = document.querySelector(`[value=${letter_elem.textContent}]`);
-            //  if word contains letter
             if (currentWord.includes(typedWord.charAt(i).toLowerCase())) {
                 if (currentWord.charAt(i) == typedWord.charAt(i).toLowerCase()) {
-                    letter_elem.style.backgroundColor = "green";
-                    kb_letter_elem.style.backgroundColor = "green";
+                    letter_elem.style.backgroundColor = "#538d4e";
+                    kb_letter_elem.style.backgroundColor = "#538d4e";
                 }else {
-                    letter_elem.style.backgroundColor = "yellow";
-                    kb_letter_elem.style.backgroundColor = "yellow";
+                    letter_elem.style.backgroundColor = "#b59f3b";
+                    kb_letter_elem.style.backgroundColor = "#b59f3b";
                 }
             } else {
-                letter_elem.style.backgroundColor = "red";
-                kb_letter_elem.style.backgroundColor = "red";
+                letter_elem.style.backgroundColor = "#3a3a3c";
+                kb_letter_elem.style.backgroundColor = "#3a3a3c";
             }
             
         }

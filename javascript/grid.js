@@ -8,7 +8,7 @@ export function generateGrid(word) {
         generatedHTML +=  `<div row-${row_index} class=\"row\">`;
         for (let index = 0; index < length; index++) {
             
-            generatedHTML += `<div block-${block_index} class=\"col\"></div>`;
+            generatedHTML += `<div block-${block_index} class=\"col cell\"></div>`;
 
             block_index++;
         }

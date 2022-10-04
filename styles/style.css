@@ -1,6 +1,5 @@
 *, body {
     margin: 0;
-    background-color: #121213;
 }
 
 .row {
@@ -20,12 +19,12 @@
     padding: 0;
 }
 
-.col {
+.cell {
     margin: 0.25em;
     border: 0.1em;
     text-align: center;
     line-height: 4em;
-    border-color: white;
+    border-color: #666;
     border-style: ridge;
     height: 5em;
 }
