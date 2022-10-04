@@ -1,4 +1,6 @@
 import { handleVisualKBInput, deletePreviousLetter, clearTypedWord, submitInput, setup } from "./game.js";
+import $ from './Jquery/jquery_module.js';
+
 var i, c, t, delay, kb;
 
 export function kb_setup() {

@@ -1,5 +1,6 @@
 import { pickAWord, isWordInList } from "./words.js";
 import { generateGrid } from "./grid.js";
+import $ from "./jquery/jquery_module.js";
 
 let currentWord;
 let currentLetterIndex;
@@ -9,35 +10,34 @@ let typedWord;
 
 export function setup() {
 
-    let grid_elem = document.querySelector(".game-grid");
+    let grid_elem = $(".game-grid");
     currentWord = pickAWord();
     currentLetterIndex = 0;
     currentRow = 0;
     typedWord = "";
-    grid_elem.innerHTML = generateGrid(currentWord);
+    grid_elem.html(generateGrid(currentWord));
     if (!hasAlreadyBeenCalled) {
-        document.addEventListener('keydown', function (event) { handleInput(event) });
+        $(document).on('keydown', function (event) { handleInput(event) });
     }
     hasAlreadyBeenCalled = true;
     console.log(currentWord);
     for (let i = 0; i < currentWord.length; i++) {
-        document.querySelector(`[block-${i + (currentRow * currentWord.length)}]`).style.backgroundColor = "";
+        $(`[block-${i + (currentRow * currentWord.length)}]`).css("background-color", "");
     }
-    // reset keyboard styles
     for (let i = 0; i < 26; i++) {
-        document.querySelector(`[value=${String.fromCharCode(65 + i)}]`).style.backgroundColor = "";
+        $(`[value=${String.fromCharCode(65 + i)}]`).css("background-color", "");
     }
 }
 
 function handleInput(e) {
-    var letter_elem = document.querySelector(`[block-${currentLetterIndex}]`);
+    var letter_elem = $(`[block-${currentLetterIndex}]`);
     var text = e.key;
     if (letter_elem == null) {
         setup();
     }
 
     if (text != " " && text != "Enter" && String.fromCharCode(e.keyCode).match(/(\w|\s)/g) && !isFinite(e.key)) {
-        letter_elem.textContent = text.toUpperCase();
+        letter_elem.text(text.toUpperCase());
         typedWord = typedWord.substring(0, currentLetterIndex) + text.toUpperCase() + typedWord.substring(currentLetterIndex + 1);
         if (currentLetterIndex != (currentWord.length * 6) - 1 && currentLetterIndex != ((currentRow + 1) * currentWord.length) - 1) {
             currentLetterIndex++;
@@ -54,11 +54,11 @@ function handleInput(e) {
 }
 
 export function handleVisualKBInput(value) {
-    var letter_elem = document.querySelector(`[block-${currentLetterIndex}]`);
+    var letter_elem = $(`[block-${currentLetterIndex}]`);
     if (letter_elem == null) {
         setup();
     }
-    letter_elem.textContent = value.toUpperCase();
+    letter_elem.text(value);
     if (currentLetterIndex != (currentWord.length * 6) - 1 && currentLetterIndex != ((currentRow + 1) * currentWord.length) - 1) {
         typedWord = typedWord.substring(0, currentLetterIndex) + value.toLowerCase() + typedWord.substring(currentLetterIndex + 1);
         currentLetterIndex++;
@@ -67,11 +67,11 @@ export function handleVisualKBInput(value) {
 
 export function deletePreviousLetter() {
 
-    var letter_elem = document.querySelector(`[block-${currentLetterIndex}]`);
+    var letter_elem = $(`[block-${currentLetterIndex}]`);
     if (letter_elem == null) {
         setup();
     }
-    letter_elem.textContent = "";
+    letter_elem.text("");
     typedWord = typedWord.substring(0, currentLetterIndex) + typedWord.substring(currentLetterIndex + 1);
     if (currentLetterIndex != 0) {
         if (currentLetterIndex != currentRow * currentWord.length) {
@@ -85,7 +85,7 @@ export function deletePreviousLetter() {
 export function clearTypedWord() {
 
     for (let i = 0; i < currentWord.length; i++) {
-        document.querySelector(`[block-${i + (currentRow * currentWord.length)}]`).textContent = "";
+        $(`[block-${i + (currentRow * currentWord.length)}]`).text("");
     }
     currentLetterIndex = currentRow * currentWord.length;
     typedWord = "";
@@ -95,19 +95,19 @@ export function submitInput() {
     console.log(typedWord);
     if (isWordInList(typedWord)) {
         for (let i = 0; i < typedWord.length; i++) {
-            let letter_elem = document.querySelector(`[block-${i + (currentRow * currentWord.length)}]`);
-            let kb_letter_elem = document.querySelector(`[value=${letter_elem.textContent}]`);
+            let letter_elem = $(`[block-${i + (currentRow * currentWord.length)}]`);
+            let kb_letter_elem = $(`[value=${letter_elem.textContent}]`);
             if (currentWord.includes(typedWord.charAt(i).toLowerCase())) {
                 if (currentWord.charAt(i) == typedWord.charAt(i).toLowerCase()) {
-                    letter_elem.style.backgroundColor = "#538d4e";
-                    kb_letter_elem.style.backgroundColor = "#538d4e";
+                    letter_elem.css("background-color","#538d4e");
+                    kb_letter_elem.css("background-color","#538d4e");
                 }else {
-                    letter_elem.style.backgroundColor = "#b59f3b";
-                    kb_letter_elem.style.backgroundColor = "#b59f3b";
+                    letter_elem.css("background-color","#b59f3b");
+                    kb_letter_elem.css("background-color","#b59f3b");
                 }
             } else {
-                letter_elem.style.backgroundColor = "#3a3a3c";
-                kb_letter_elem.style.backgroundColor = "#3a3a3c";
+                letter_elem.css("background-color","#3a3a3c");
+                kb_letter_elem.css("background-color","#3a3a3c");
             }
             
         }
@@ -116,10 +116,10 @@ export function submitInput() {
             console.log("WIN");
             alert(`You won with ${currentRow } tries`);
             for (let i = 0; i < currentWord.length; i++) {
-                document.querySelector(`[block-${i + (currentRow * currentWord.length)}]`).style.backgroundColor = "";
+                $(`[block-${i + (currentRow * currentWord.length)}]`).style.backgroundColor = "";
             }
             for (let i = 0; i < 26; i++) {
-                document.querySelector(`[value=${String.fromCharCode(65 + i)}]`).style.backgroundColor = "";
+                $(`[value=${String.fromCharCode(65 + i)}]`).style.backgroundColor = "";
             }
 
             setup();
