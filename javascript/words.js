@@ -14,8 +14,7 @@ async function fetchWords() {
     await fetch('https://raw.githubusercontent.com/jordanrioux/wordle-api/master/db.json').then(response => 
     response.json().then(data => ({
         data: data
-    })
-).then(res => {
-    words = res.data.words;
-}));
+    })).then(res => {
+        words = res.data.words;
+    }));
 }
