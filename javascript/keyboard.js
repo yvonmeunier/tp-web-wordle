@@ -4,20 +4,12 @@ import $ from './Jquery/jquery_module.js';
 var i, c, t, delay, kb;
 
 export function kb_setup() {
-    i, c, t, delay = 5000, kb = document.getElementById('keyboard');
-    i = kb.getElementsByTagName('input');
-    document.getElementById('clear').addEventListener('click',
-        function () {
-            clearTypedWord();
-        }, false);
-    document.getElementById('submit').addEventListener('click',
-        function () {
-            submitInput();
-        }, false);
-    document.getElementById('restart').addEventListener('click',
-        function () {
-            setup();
-        }, false);
+    i, c, t, delay = 5000, 
+    kb = $('keyboard');
+    i = $('input');
+    $('#clear').on("click",clearTypedWord);
+    $('#submit').on("click",submitInput);
+    $('#restart').on("click", setup);
     generateHandlers();
 }
 
@@ -40,8 +32,8 @@ function makeClickHandler(c) {
     };
 }
 function logout() {
-    kb.classList.remove('show');
-    kb.classList.add('hide');
+    kb.removeClass('show');
+    kb.addClass('hide');
 }
 
 export function resetTimer() {
