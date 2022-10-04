@@ -7,6 +7,16 @@ let currentLetterIndex;
 let currentRow;
 let hasAlreadyBeenCalled;
 let typedWord;
+
+let current_streak;
+let high_score_streak;
+let last_game_result;// the amount of attemps it took last game, -1 if lost game
+let win;// amount of wins
+let lose;// amount of lost
+let played;// amount of game played
+let winList;// size 6, increment the one according to the guesses you needed
+let current_grid;// the current grid elem
+
 export async function setup() {
 
     let grid_elem = $(".game-grid");
