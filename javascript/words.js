@@ -7,3 +7,4 @@ export function pickAWord() {
 export function isWordInList(word) {
     return list.includes(word.toLowerCase());
 }
+// fetch if is empty
