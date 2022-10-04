@@ -7,7 +7,6 @@ let currentLetterIndex;
 let currentRow;
 let hasAlreadyBeenCalled;
 let typedWord;
-
 export async function setup() {
 
     let grid_elem = $(".game-grid");

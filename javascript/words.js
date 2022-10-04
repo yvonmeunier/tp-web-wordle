@@ -1,7 +1,8 @@
 import WordService from "./services/WordService.js";
 var list;
+var ws;
 export async function pickAWord() {
-    var ws = new WordService;
+    ws = new WordService();
     list = await ws.getWords();
     const maxIndex = list.length - 1;
     let wordIndex = Math.floor(Math.random() * maxIndex);

@@ -1,11 +1,12 @@
-import CacheStorage from "../helpers/CacheStorage.js";
+import CacheService from "./CacheService.js";
+let cacheService;
 export default class WordService {
     constructor() {
-        this.cacheStorage = new CacheStorage();
+        this.cacheService = new CacheService();
     }
    async getWords() {
     var list;
-    const cachedWords = this.cacheStorage.get("words");
+    const cachedWords = await this.cacheService.get("words");
     if (cachedWords) {
         return cachedWords;
     }
@@ -17,7 +18,7 @@ export default class WordService {
         list = res.data.words;
     }));
 
-    this.cacheStorage.set("words", list);
+    this.cacheService.set("words", list);
     return list;
 }
 }
