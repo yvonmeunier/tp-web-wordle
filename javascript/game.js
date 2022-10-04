@@ -16,6 +16,7 @@ let lose;// amount of lost
 let played;// amount of game played
 let winList;// size 6, increment the one according to the guesses you needed
 let current_grid;// the current grid elem
+let current_keyboard;// the current grid elem
 
 export async function setup() {
 
