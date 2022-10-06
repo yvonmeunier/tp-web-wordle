@@ -47,26 +47,46 @@ export async function setup() {
   console.log(currentWord);
   addEvents();
   // inject data into the stats modal and generate the graph
+  initStats();
+  injectGraph();
+  injectStats();
 }
+
+function injectGraph() {}
+function injectStats() {}
+
+function initStats() {
+  // initialize the stats
+  current_streak = cs.get("current_streak") || 0;
+  high_score_streak = cs.get("high_score_streak") || 0;
+  last_game_result = cs.get("last_game_result") || -1;
+  win = cs.get("win") || 0;
+  played = cs.get("played") || 0;
+  winList = cs.get("winList") || [0, 0, 0, 0, 0, 0];
+}
+
 function addEvents() {
   if (!hasAlreadyBeenCalled) {
     $(document).on("keydown", function (event) {
       handleInput(event);
     });
     $("#theme-switch").on("click", function () {
-        if ($("#theme-switch input").prop("checked")) {
-            // change the theme to dark
-            $("body").addClass("bg-dark text-light");
-            $(".modal-content").addClass("bg-dark text-light");
-            $("#navbar").addClass("navbar-dark text-light");
-        } else {
-            // change the theme to light
-            $("body").removeClass("bg-dark text-light");
-            $(".modal-content").removeClass("bg-dark text-light");
-            $("#navbar").removeClass("navbar-dark text-light");
-        }
-        // save the theme to the cache
-        cs.set("theme", $("#theme-switch input").prop("checked") == true ? "dark" : "light");
+      if ($("#theme-switch input").prop("checked")) {
+        // change the theme to dark
+        $("body").addClass("bg-dark text-light");
+        $(".modal-content").addClass("bg-dark text-light");
+        $("#navbar").addClass("navbar-dark text-light");
+      } else {
+        // change the theme to light
+        $("body").removeClass("bg-dark text-light");
+        $(".modal-content").removeClass("bg-dark text-light");
+        $("#navbar").removeClass("navbar-dark text-light");
+      }
+      // save the theme to the cache
+      cs.set(
+        "theme",
+        $("#theme-switch input").prop("checked") == true ? "dark" : "light"
+      );
     });
   }
   hasAlreadyBeenCalled = true;
