@@ -207,7 +207,6 @@ export function submitInput() {
     if (currentRow == 6) {
       Lose();
     }
-    
   }
 
   clearTypedWord();
@@ -218,12 +217,21 @@ function Win() {
   console.log("WIN");
   alert(`You won with ${currentRow} tries`);
   current_streak++;
+  if (current_streak > high_score_streak) {
+    high_score_streak = current_streak;
+    cs.set("high_score_streak", high_score_streak);
+  }
   DeleteState();
   setup();
 }
 
 function Lose() {
   alert("GEAM OVR");
+  if (current_streak > high_score_streak) {
+    high_score_streak = current_streak;
+    cs.set("high_score_streak", high_score_streak);
+  }
+  current_streak = 0;
   DeleteState();
   setup();
 }
