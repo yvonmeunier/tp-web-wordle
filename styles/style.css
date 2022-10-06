@@ -95,6 +95,10 @@ body {
   justify-content: center;
 }
 
+#graph {
+  margin-top: 1em;
+}
+
 /*TOGGLE CSS*/
 
 .switch {

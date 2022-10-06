@@ -2,6 +2,7 @@ import { pickAWord, isWordInList, initList } from "./words.js";
 import { generateGrid } from "./grid.js";
 import $ from "./jquery/jquery_module.js";
 import CacheService from "./services/CacheService.js";
+import { generateGraph } from "./graph.js";
 
 let currentWord;
 let currentLetterIndex;
@@ -31,7 +32,6 @@ export async function setup() {
         $("#theme-switch input").prop("checked", true);
     }
     if (cs.get("grid") == null) {
-        played++;
         currentWord = await pickAWord();
         currentLetterIndex = 0;
         currentRow = 0;
@@ -49,19 +49,23 @@ export async function setup() {
     addEvents();
     injectGraph();
     injectStats();
+    if (cs.get("grid") == null) {
+        played++;
+    }
+        
+    
 }
 
 function injectGraph() {
-
-    
-
+    let generatedGraph = generateGraph(winList, played, last_game_result);
+    $("#graph").html(generatedGraph);
  }
 function injectStats() {
 
     $("#current_streak").text(current_streak);
     $("#high_score_streak").text(high_score_streak);
     $("#last_game_result").text(last_game_result);
-    $("#win").text(Math.round((win / played) * 100));
+    $("#win").text(Math.round((win / played || 1) * 100));
     $("#played").text(played);
     $("#winList").text(winList);
 
@@ -237,7 +241,7 @@ function Win() {
     alert(`You won with ${currentRow} tries`);
     current_streak++;
     win++;
-    last_game_result = currentRow;
+    last_game_result = currentRow - 1;
     winList[currentRow - 1]++;
     if (current_streak > high_score_streak) {
         high_score_streak = current_streak;
@@ -253,6 +257,7 @@ function Lose() {
         high_score_streak = current_streak;
     }
     current_streak = 0;
+    last_game_result = -1;
     saveStats();
     DeleteState();
     setup();
