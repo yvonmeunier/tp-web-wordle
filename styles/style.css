@@ -78,6 +78,23 @@ body {
   min-width: 500ex;
 }
 
+.stat-block {
+  max-width: 25%;
+}
+
+#stats {
+  justify-content: center;
+}
+
+.number {
+  font-size: 1.5em;
+  justify-content: center;
+}
+
+.text {
+  justify-content: center;
+}
+
 /*TOGGLE CSS*/
 
 .switch {
