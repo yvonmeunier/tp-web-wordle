@@ -21,7 +21,7 @@ export async function setup() {
     // if there is a game saved in cache, load it
     // if not, create a new game
     // add event listener to the theme switch
-    // inject data into the stats modal
+    // inject data into the stats modal and generate the graph
     let grid_elem = $(".game-grid");
     currentWord = await pickAWord();
     currentLetterIndex = 0;
