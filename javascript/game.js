@@ -1,4 +1,4 @@
-import { pickAWord, isWordInList } from "./words.js";
+import { pickAWord, isWordInList, initList } from "./words.js";
 import { generateGrid } from "./grid.js";
 import $ from "./jquery/jquery_module.js";
 import CacheService from "./services/CacheService.js";
@@ -37,11 +37,12 @@ export async function setup() {
     grid_elem.html(generateGrid(currentWord));
     resetStyle();
   } else {
-    grid_elem.html(cs.get("current_grid"));
+    await initList();
+    grid_elem.html(cs.get("grid"));
     $("keyboard").html(cs.get("current_keyboard"));
     currentWord = cs.get("currentWord");
     currentRow = cs.get("currentRow");
-    currentLetterIndex = currentRow * currentWord.length + 1;
+    currentLetterIndex = currentRow * currentWord.length;
     current_streak = cs.get("current_streak");
   }
   console.log(currentWord);
@@ -200,26 +201,40 @@ export function submitInput() {
     }
     currentRow++;
     if (typedWord.toLowerCase() == currentWord) {
-      console.log("WIN");
-      alert(`You won with ${currentRow} tries`);
-      for (let i = 0; i < currentWord.length; i++) {
-        $(`[block-${i + currentRow * currentWord.length}]`).css(
-          "background-color",
-          ""
-        );
-      }
-      for (let i = 0; i < 26; i++) {
-        $(`[value=${String.fromCharCode(65 + i)}]`).css("background-color", "");
-      }
-
-      setup();
+      Win();
     }
     if (currentRow == 6) {
-      alert("GEAM OVR");
-      setup();
+      Lose();
     }
+    SaveState();
   }
 
   clearTypedWord();
   currentLetterIndex = currentRow * currentWord.length;
+}
+
+function Win() {
+  console.log("WIN");
+  alert(`You won with ${currentRow} tries`);
+  DeleteState();
+  setup();
+}
+
+function Lose() {
+  alert("GEAM OVR");
+  DeleteState();
+  setup();
+}
+
+function SaveState() {
+  cs.set("currentWord", currentWord);
+  cs.set("currentRow", currentRow);
+  cs.set("currentLetterIndex", currentLetterIndex);
+  cs.set("grid", $(".game-grid").html());
+}
+function DeleteState() {
+  cs.remove("currentWord");
+  cs.remove("currentRow");
+  cs.remove("currentLetterIndex");
+  cs.remove("grid");
 }

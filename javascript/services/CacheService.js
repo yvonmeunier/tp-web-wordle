@@ -9,4 +9,7 @@ export default class CacheService {
     set(key,value) {
         this.cs.set(key,value);
     }
+    remove(key) {
+        this.cs.remove(key);
+    }
 }

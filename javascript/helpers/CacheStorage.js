@@ -8,5 +8,7 @@ export default class CacheStorage {
         const stringifiedItem = JSON.stringify(item);
         localStorage.setItem(key, stringifiedItem);
     }
-    
+    remove(key) {
+        localStorage.removeItem(key);
+    }
 }

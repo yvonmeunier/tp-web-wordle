@@ -1,6 +1,10 @@
 import WordService from "./services/WordService.js";
 var list;
 var ws;
+export async function initList() {
+  ws = new WordService();
+  list = await ws.getWords();
+}
 export async function pickAWord() {
   ws = new WordService();
   list = await ws.getWords();
