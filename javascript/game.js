@@ -24,6 +24,7 @@ export async function setup() {
   cs = new CacheService();
   grid_elem = $(".game-grid");
   typedWord = "";
+  current_streak = cs.get("current_streak") || 0;
   if (cs.get("theme") == "dark") {
     $("body").addClass("bg-dark text-light");
     $(".modal-content").addClass("bg-dark text-light");
@@ -43,7 +44,6 @@ export async function setup() {
     currentWord = cs.get("currentWord");
     currentRow = cs.get("currentRow");
     currentLetterIndex = currentRow * currentWord.length;
-    current_streak = cs.get("current_streak");
   }
   console.log(currentWord);
   addEvents();
@@ -200,13 +200,14 @@ export function submitInput() {
       }
     }
     currentRow++;
+    SaveState();
     if (typedWord.toLowerCase() == currentWord) {
       Win();
     }
     if (currentRow == 6) {
       Lose();
     }
-    SaveState();
+    
   }
 
   clearTypedWord();
@@ -216,6 +217,7 @@ export function submitInput() {
 function Win() {
   console.log("WIN");
   alert(`You won with ${currentRow} tries`);
+  current_streak++;
   DeleteState();
   setup();
 }
@@ -231,10 +233,13 @@ function SaveState() {
   cs.set("currentRow", currentRow);
   cs.set("currentLetterIndex", currentLetterIndex);
   cs.set("grid", $(".game-grid").html());
+  cs.set("keyboard", $("#keyboard").html());
+  cs.set("current_streak", current_streak);
 }
 function DeleteState() {
   cs.remove("currentWord");
   cs.remove("currentRow");
   cs.remove("currentLetterIndex");
   cs.remove("grid");
+  cs.remove("keyboard");
 }
