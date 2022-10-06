@@ -27,6 +27,7 @@ export async function setup() {
   if (cs.get("theme") == "dark") {
     $("body").addClass("bg-dark text-light");
     $(".modal-content").addClass("bg-dark text-light");
+    $("#navbar").addClass("navbar-dark text-light");
     $("#theme-switch input").prop("checked", true);
   }
   if (cs.get("grid") == null) {
@@ -57,10 +58,12 @@ function addEvents() {
             // change the theme to dark
             $("body").addClass("bg-dark text-light");
             $(".modal-content").addClass("bg-dark text-light");
+            $("#navbar").addClass("navbar-dark text-light");
         } else {
             // change the theme to light
             $("body").removeClass("bg-dark text-light");
             $(".modal-content").removeClass("bg-dark text-light");
+            $("#navbar").removeClass("navbar-dark text-light");
         }
         // save the theme to the cache
         cs.set("theme", $("#theme-switch input").prop("checked") == true ? "dark" : "light");
