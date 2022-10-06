@@ -18,7 +18,10 @@ let current_grid;// the current grid elem
 let current_keyboard;// the current grid elem
 
 export async function setup() {
-
+    // if there is a game saved in cache, load it
+    // if not, create a new game
+    // add event listener to the theme switch
+    // inject data into the stats modal
     let grid_elem = $(".game-grid");
     currentWord = await pickAWord();
     currentLetterIndex = 0;
@@ -101,6 +104,8 @@ export function clearTypedWord() {
 
 }
 export function submitInput() {
+    // Everytime you submit a word, save the current state of the game in cache
+    // if you win, clear the save state and update the stats in cache
     console.log(typedWord);
     if (isWordInList(typedWord)) {
         for (let i = 0; i < typedWord.length; i++) {
