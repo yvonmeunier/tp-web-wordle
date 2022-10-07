@@ -166,21 +166,21 @@ export function handleVisualKBInput(value) {
         typedWord.substring(0, currentLetterIndex) +
         value.toLowerCase() +
         typedWord.substring(currentLetterIndex + 1);
-        if (
-            currentLetterIndex != currentWord.length * 6 - 1 &&
-            currentLetterIndex != (currentRow + 1) * currentWord.length - 1
-        ) {
-            currentLetterIndex++;
-        }
+    if (
+        currentLetterIndex != currentWord.length * 6 - 1 &&
+        currentLetterIndex != (currentRow + 1) * currentWord.length - 1
+    ) {
+        currentLetterIndex++;
+    }
 }
 
 export function deletePreviousLetter() {
 
-    let  letter_elem;
-    letter_elem = $(`[block-${currentLetterIndex }]`);
+    let letter_elem;
+    letter_elem = $(`[block-${currentLetterIndex}]`);
     letter_elem.text("");
     typedWord = typedWord.substring(0, typedWord.length - 1);
-        
+
     if (typedWord.length != 0) {
         currentLetterIndex--;
     }
