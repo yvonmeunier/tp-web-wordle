@@ -3,7 +3,7 @@ import {
   deletePreviousLetter,
   clearTypedWord,
   submitInput,
-  setup,
+  setup, DeleteState,
 } from "./game.js";
 import $ from "./Jquery/jquery_module.js";
 
@@ -14,7 +14,10 @@ export function kb_setup() {
   i = $("input");
   $("#clear").on("click", clearTypedWord);
   $("#submit").on("click", submitInput);
-  $("#restart").on("click", setup);
+  $("#restart").on("click", function () {
+    DeleteState();
+    setup();
+  });
   generateHandlers();
 }
 

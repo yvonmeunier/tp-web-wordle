@@ -161,36 +161,30 @@ function handleInput(e) {
 
 export function handleVisualKBInput(value) {
     var letter_elem = $(`[block-${currentLetterIndex}]`);
-    if (letter_elem == null) {
-        setup();
-    }
     letter_elem.text(value);
     typedWord =
         typedWord.substring(0, currentLetterIndex) +
         value.toLowerCase() +
         typedWord.substring(currentLetterIndex + 1);
-    if (
-        currentLetterIndex != currentWord.length * 6 - 1 &&
-        currentLetterIndex != (currentRow + 1) * currentWord.length - 1
-    ) {
-        currentLetterIndex++;
-    }
+        if (
+            currentLetterIndex != currentWord.length * 6 - 1 &&
+            currentLetterIndex != (currentRow + 1) * currentWord.length - 1
+        ) {
+            currentLetterIndex++;
+        }
 }
 
 export function deletePreviousLetter() {
-    var letter_elem = $(`[block-${currentLetterIndex}]`);
-    if (letter_elem == null) {
-        setup();
-    }
+
+    let  letter_elem;
+    letter_elem = $(`[block-${currentLetterIndex }]`);
     letter_elem.text("");
-    typedWord =
-        typedWord.substring(0, currentLetterIndex) +
-        typedWord.substring(currentLetterIndex + 1);
-    if (currentLetterIndex != 0) {
-        if (currentLetterIndex != currentRow * currentWord.length) {
-            currentLetterIndex--;
-        }
+    typedWord = typedWord.substring(0, typedWord.length - 1);
+        
+    if (typedWord.length != 0) {
+        currentLetterIndex--;
     }
+
 }
 
 export function clearTypedWord() {
@@ -271,7 +265,7 @@ function SaveState() {
     cs.set("keyboard", $("#keyboard").html());
     cs.set("current_streak", current_streak);
 }
-function DeleteState() {
+export function DeleteState() {
     cs.remove("currentWord");
     cs.remove("currentRow");
     cs.remove("currentLetterIndex");
