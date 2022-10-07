@@ -64,7 +64,6 @@ function injectStats() {
 
     $("#current_streak").text(current_streak);
     $("#high_score_streak").text(high_score_streak);
-    $("#last_game_result").text(last_game_result);
     $("#win").text(Math.round((win / played || 1) * 100));
     $("#played").text(played);
     $("#winList").text(winList);
@@ -74,7 +73,7 @@ function injectStats() {
 function initStats() {
     current_streak = cs.get("current_streak") || 0;
     high_score_streak = cs.get("high_score_streak") || 0;
-    last_game_result = cs.get("last_game_result") || -1;
+    last_game_result = cs.get("last_game_result");
     win = cs.get("win") || 0;
     played = cs.get("played") || 0;
     winList = cs.get("winList") || [0, 0, 0, 0, 0, 0];
@@ -222,7 +221,7 @@ export function submitInput() {
                 kb_letter_elem.css("background-color", "#3a3a3c");
             }
         }
-        currentRow++;
+        
         SaveState();
         if (typedWord.toLowerCase() == currentWord) {
             Win();
@@ -230,6 +229,7 @@ export function submitInput() {
         if (currentRow == 6) {
             Lose();
         }
+        currentRow++;
     }
 
     clearTypedWord();
@@ -238,11 +238,11 @@ export function submitInput() {
 
 function Win() {
     console.log("WIN");
-    alert(`You won with ${currentRow} tries`);
+    alert(`You won with ${currentRow +1} tries`);
     current_streak++;
     win++;
-    last_game_result = currentRow - 1;
-    winList[currentRow - 1]++;
+    last_game_result = currentRow;
+    winList[currentRow]++;
     if (current_streak > high_score_streak) {
         high_score_streak = current_streak;
     }
