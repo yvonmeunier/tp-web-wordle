@@ -195,8 +195,6 @@ export function clearTypedWord() {
     typedWord = "";
 }
 export function submitInput() {
-    // Everytime you submit a word, save the current state of the game in cache
-    // if you win, clear the save state and update the stats in cache
     console.log(typedWord);
     if (isWordInList(typedWord)) {
         for (let i = 0; i < typedWord.length; i++) {
