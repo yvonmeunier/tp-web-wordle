@@ -52,14 +52,14 @@ export async function setup() {
     if (cs.get("grid") == null) {
         played++;
     }
-        
-    
+
+
 }
 
 function injectGraph() {
     let generatedGraph = generateGraph(winList, played, last_game_result);
     $("#graph").html(generatedGraph);
- }
+}
 function injectStats() {
 
     $("#current_streak").text(current_streak);
@@ -221,7 +221,7 @@ export function submitInput() {
                 kb_letter_elem.css("background-color", "#3a3a3c");
             }
         }
-        
+
         SaveState();
         if (typedWord.toLowerCase() == currentWord) {
             Win();
@@ -238,7 +238,7 @@ export function submitInput() {
 
 function Win() {
     console.log("WIN");
-    alert(`You won with ${currentRow +1} tries`);
+    alert(`You won with ${currentRow + 1} tries`);
     current_streak++;
     win++;
     last_game_result = currentRow;

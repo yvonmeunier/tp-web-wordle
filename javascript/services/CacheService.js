@@ -6,8 +6,8 @@ export default class CacheService {
     get(key) {
         return this.cs.get(key);
     }
-    set(key,value) {
-        this.cs.set(key,value);
+    set(key, value) {
+        this.cs.set(key, value);
     }
     remove(key) {
         this.cs.remove(key);
